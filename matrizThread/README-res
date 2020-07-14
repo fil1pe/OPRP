@@ -1,0 +1,108 @@
+
+ ##### somar_t0 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000001
+
+ ##### somar_t1 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000001
+
+%%%%%%%%
+
+ ##### multiplicar_t0 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000002
+
+ ##### multiplicar_t1 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000002
+
+ ##### multiplicar_t2 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000001
+
+ ##### multiplicar_t3 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000001
+
+ ##### multiplicar_t4 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000002
+
+ ##### multiplicar_t5 de Matrizes #####
+	(0)	(1)	(2)	(3)
+(0)	2	4	2	4
+(1)	4	2	6	2
+(2)	4	2	4	2
+
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+ 	WARNING: Impressão truncada em 15x15! 
+ 	WARNING: Último elemento matriz[2][3] = 2 
+ %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%%
+	Runtime: 0.000001
+
+ ##### Comparação dos resultados da adição de matrizes #####
+[soma_t0 vs soma_t1]		VERIFICADO: Matrizes identicas
+
+ ##### Comparação dos resultados da Multiplicação de matrizes #####
+[mult_t0 vs mult_t1]		VERIFICADO: Matrizes identicas
+[mult_t0 vs mult_t2]		VERIFICADO: Matrizes identicas
+[mult_t0 vs mult_t3]		VERIFICADO: Matrizes identicas
+[mult_t0 vs mult_t4]		VERIFICADO: Matrizes identicas
+[mult_t0 vs mult_t5]		VERIFICADO: Matrizes identicas
