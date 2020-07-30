@@ -31,3 +31,7 @@ Utilize o comando make clean.
 ### Exemplo ###
 
 $ make clean; make; ./gmat 1000 1000; ./main 1000x1000-mat.map 1000x1000-mat.map 10
+
+### Para avaliação ###
+
+As funções implementadas com OpenMP estão localizadas no arquivo matriz-operacoes-openmp.h e matriz-operacoes-openmp.c. Elas são chamadas no programa principal implementado em main.c.
