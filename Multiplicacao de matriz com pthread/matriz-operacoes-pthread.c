@@ -52,6 +52,11 @@ mymatriz *mmultiplicar_pthread(mymatriz* matA, mymatriz* matB, int nth) {
 void *th_func2(void *p) {
     block_mat_mult_th *pc = (block_mat_mult_th*) p;
     multiplicar_submatriz(pc->A, pc->B, pc->C);
+    free(pc->A->bloco);
+    free(pc->A);
+    free(pc->B->bloco);
+    free(pc->B);
+    free(pc->C->bloco);
     return NULL;
 }
 
@@ -80,12 +85,10 @@ mymatriz *mmultiplicar_pthread_blocos(mymatriz* matA, mymatriz* matB, int nth) {
 
     for (i=0; i<nth; i++) {
         pthread_join(threads[i], NULL);
-        res = msomar(res, C[i]->matriz, 0);
-        free(A[i]->bloco);
-        free(A[i]);
-        free(B[i]->bloco);
-        free(B[i]);
-        free(C[i]->bloco);
+        mymatriz *aux = msomar(res, C[i]->matriz, 0);
+        mliberar(res);
+        free(res);
+        res = aux;
         mliberar(C[i]->matriz);
         free(C[i]->matriz);
         free(C[i]);

@@ -179,17 +179,17 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; i < EXECUTIONS; i++) {
         printf("[mult%d vs mult_thread%d]\t\t", i, i);
-        mcomparar(mmult[0], thread_mmult[0]);
+        mcomparar(mmult[i], thread_mmult[i]);
     }
 
     for (int i = 0; i < EXECUTIONS; i++) {
         printf("[mult%d vs mult_block%d]\t\t", i, i);
-        mcomparar(mmult[0], mmultbloco[0]);
+        mcomparar(mmult[i], mmultbloco[i]);
     }
 
     for (int i = 0; i < EXECUTIONS; i++) {
         printf("[mult%d vs mult_block_thread%d]\t", i, i);
-        mcomparar(mmult[0], thread_mmultbloco[0]);
+        mcomparar(mmult[i], thread_mmultbloco[i]);
     }
 
 
