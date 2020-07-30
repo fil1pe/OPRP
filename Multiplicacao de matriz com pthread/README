@@ -1,0 +1,32 @@
+##########################################################
+### Disciplina de Programação Paralela Avançada 2020/1 ###
+###                 Aluno: Filipe Ramos                ###
+##########################################################
+
+### Como compilar ###
+
+Utilize o comando make.
+
+### Como executar ###
+
+1) Gere alguma matriz por meio do comando ./gmat <nr_linhas> <nr_colunas> sendo <nr_linhas> o número de linhas e <nr_colunas> o número de colunas;
+2) Gere outra matriz compatível para a multiplicação;
+3) Execute ./main <matriz_a> <matriz_b> <nthreads> em que <matriz_a> é o arquivo gerado em (1), <matriz_b> é o arquivo gerado em (2) e <nthreads> é o número de threads desejado.
+
+### Os arquivos gerados ###
+
+1) Multiplicação simples: mult<i>.result
+2) Multiplicação simples com threads: mult_thread<i>.result
+3) Multiplicação em bloco: mult_block<i>.result
+4) Multiplicação em bloco com threads: mult_block_thread<i>.result
+
+em que <i> é o identificador da execução. Por padrão cada uma das quatro abordagens é executada quatro vezes. Pode-se mudar essa repetição alterando o valor da constante EXECUTIONS no arquivo main.c.
+
+### Como limpar ###
+
+Utilize o comando make clean.
+
+### Exemplo ###
+
+$ make clean; make; ./gmat 1000 1000; ./main 1000x1000-mat.map 1000x1000-mat.map 10
+ 
