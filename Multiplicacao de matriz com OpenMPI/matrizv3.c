@@ -1,5 +1,6 @@
 #include "matrizv3.h"
 #include <time.h>
+#include <math.h>
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int malocar (mymatriz *matriz) {
@@ -60,13 +61,14 @@ int mimprimir (mymatriz *matriz){
 	printf("\n");
 	for (int i=0; i < linha; i++) {
 		printf("(%d)", i);
-	  for (int j=0; j < coluna; j++){
+	  	for (int j=0; j < coluna; j++){
 			printf("\t%d", matriz->matriz[i][j]);
 		}
 		printf("\n");
 	}
 
-	printf("\n \
+	if (linha > 0 && coluna > 0)
+		printf("\n \
 %%%%%%%%%%%% %%%%%%%%%%%% %%%%%%%%%%%% %%%%%%%%%%%% %%%%%%%%%%%% %%%%%%%%%%%% %%%%%%%%%%%% %%%%%%%%%%%%\n \
 	WARNING: Impressão truncada em 15x15! \n \
 	WARNING: Último elemento matriz[%d][%d] = %d \n \
@@ -167,4 +169,22 @@ matriz_bloco_t **constroi_submatrizv2(int mat_lin, int mat_col, int divisor) {
   }
 
   return m;
+}
+
+mymatriz **particionar_matrizv2(mymatriz *mat, int divisor) {
+	mymatriz **m = (mymatriz**) malloc(divisor*sizeof(mymatriz*));
+
+	int bloco_lin = ceil(mat->lin/(float)divisor);
+
+	for (int k=0; k<divisor; k++) {
+		m[k] = (mymatriz*) malloc(sizeof(mymatriz));
+		m[k]->lin = k == divisor-1 ? mat->lin - k*bloco_lin : bloco_lin;
+		m[k]->col = mat->col;
+		malocar(m[k]);
+		for (int i=0; i<m[k]->lin; i++)
+			for (int j=0; j<m[k]->col; j++)
+				m[k]->matriz[i][j] = mat->matriz[i + k*bloco_lin][j];
+	}
+
+	return m;
 }
