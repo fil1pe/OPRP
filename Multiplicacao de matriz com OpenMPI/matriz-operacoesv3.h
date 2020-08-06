@@ -7,5 +7,6 @@
 
 mymatriz *msomar(mymatriz *mat_a, mymatriz *mat_b, int tipo);
 mymatriz *mmultiplicar(mymatriz *mat_a, mymatriz *mat_b, int tipo);
+mymatriz *transposta(mymatriz *mat);
 
 int multiplicar_submatriz(matriz_bloco_t *mat_suba, matriz_bloco_t *mat_subb, matriz_bloco_t *mat_subc);

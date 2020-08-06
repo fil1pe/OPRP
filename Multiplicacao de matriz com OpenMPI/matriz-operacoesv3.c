@@ -10,10 +10,10 @@
 mymatriz *msomar(mymatriz *mat_a, mymatriz *mat_b, int tipo) {
   mymatriz *mat_c = NULL;
 
-	if ((mat_a->lin != mat_b-> lin) || (mat_a->col != mat_b->col)){
+	/*if ((mat_a->lin != mat_b-> lin) || (mat_a->col != mat_b->col)){
 		printf ("Erro: Matrizes incompatíveis!\n");
 		exit(1);
-	}
+	}*/
 
 	mat_c = (mymatriz *) malloc (sizeof(mymatriz));
 	mat_c->lin = mat_a->lin;
@@ -83,6 +83,20 @@ mymatriz *mmultiplicar(mymatriz *mat_a, mymatriz *mat_b, int tipo) {
   }
 
   return mat_c;
+}
+
+mymatriz *transposta(mymatriz *mat) {
+  mymatriz *mat_trans = (mymatriz *) malloc (sizeof(mymatriz));
+	mat_trans->lin = mat->col;
+	mat_trans->col = mat->lin;
+
+  if (malocar(mat_trans)) printf ("ERROR: Out of memory\n");
+
+  for (int i=0; i<mat_trans->lin; i++)
+    for (int j=0; j<mat_trans->col; j++)
+      mat_trans->matriz[i][j] = mat->matriz[j][i];
+  
+  return mat_trans;
 }
 
 int multiplicar_submatriz(matriz_bloco_t *mat_suba, matriz_bloco_t *mat_subb, matriz_bloco_t *mat_subc) {
