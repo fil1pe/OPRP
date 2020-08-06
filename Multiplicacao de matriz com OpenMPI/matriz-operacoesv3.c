@@ -10,10 +10,11 @@
 mymatriz *msomar(mymatriz *mat_a, mymatriz *mat_b, int tipo) {
   mymatriz *mat_c = NULL;
 
-	/*if ((mat_a->lin != mat_b-> lin) || (mat_a->col != mat_b->col)){
-		printf ("Erro: Matrizes incompatíveis!\n");
-		exit(1);
-	}*/
+	if ((mat_a->lin != mat_b-> lin) || (mat_a->col != mat_b->col)){
+		//printf ("Erro: Matrizes incompatíveis!\n");
+		//exit(1);
+    return mat_a;
+	}
 
 	mat_c = (mymatriz *) malloc (sizeof(mymatriz));
 	mat_c->lin = mat_a->lin;

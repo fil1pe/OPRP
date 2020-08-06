@@ -8,7 +8,7 @@
 #include "matrizv3.h"
 #include "matriz-operacoesv3.h"
 #include "matriz-operacoes-openmpi.h"
-#define EXECUTIONS 1
+#define EXECUTIONS 4
 
 int main(int argc, char *argv[]) {
     int rank, nthreads;
@@ -170,8 +170,9 @@ int main(int argc, char *argv[]) {
             printf("##### Multiplicação em bloco com OpenMPI (mult_block_openmpi%d) #####\n", j);
             start_time = wtime();
 
-            thread_mmultbloco[j] = mmultiplicar_openmpi_blocos(mat_a, mat_b, nthreads);
-        }
+            thread_mmultbloco[j] = mmultiplicar_openmpi_blocos(mat_a, mat_b, rank, nthreads);
+        } else
+            mmultiplicar_openmpi_blocos(mat_a, mat_b, rank, nthreads);
 
         if (!rank) {
             end_time = wtime();
