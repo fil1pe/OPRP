@@ -17,6 +17,8 @@ int main(int argc, char *argv[]) {
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nthreads);
 
+    #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+
     mymatriz *mat_a, *mat_b, **mmultbloco, **mmult, **thread_mmultbloco, **thread_mmult;
     char filename[100];
     FILE *fmat;
@@ -110,13 +112,9 @@ int main(int argc, char *argv[]) {
         if (!rank) {
             j = EXECUTIONS - 1 - i;
             printf("##### Multiplicação normal com OpenMPI (mult_openmpi%d) #####\n", j);
+
             start_time = wtime();
-
             thread_mmult[j] = mmultiplicar_openmpi(mat_a, mat_b, rank, nthreads);
-        } else
-            mmultiplicar_openmpi(mat_a, mat_b, rank, nthreads);
-
-        if (!rank) {
             end_time = wtime();
 
             printf("  Tempo: %f s\n", end_time - start_time);
@@ -126,7 +124,8 @@ int main(int argc, char *argv[]) {
             fclose(fmat);
 
             thr_normal_times[j] = (end_time - start_time);
-        }
+        } else
+            mmultiplicar_openmpi(mat_a, mat_b, rank, nthreads);
     }
     
     if (!rank) {
@@ -168,13 +167,9 @@ int main(int argc, char *argv[]) {
         if (!rank) {
             j = EXECUTIONS - 1 - i;
             printf("##### Multiplicação em bloco com OpenMPI (mult_block_openmpi%d) #####\n", j);
+
             start_time = wtime();
-
             thread_mmultbloco[j] = mmultiplicar_openmpi_blocos(mat_a, mat_b, rank, nthreads);
-        } else
-            mmultiplicar_openmpi_blocos(mat_a, mat_b, rank, nthreads);
-
-        if (!rank) {
             end_time = wtime();
             
             printf("  Tempo: %f s\n", end_time - start_time);
@@ -184,7 +179,8 @@ int main(int argc, char *argv[]) {
             fclose(fmat);
 
             thr_bloco_times[j] = end_time - start_time;
-        }
+        } else
+            mmultiplicar_openmpi_blocos(mat_a, mat_b, rank, nthreads);
     }
     
     if (!rank) {
