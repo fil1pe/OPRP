@@ -230,16 +230,24 @@ int main(int argc, char *argv[]) {
     printf("Multiplicação normal:\t%03lf\nMultiplicação bloco:\t%03lf\n", speedup_normal, speedup_bloco);
 
 
-    mliberar(mmult[0]);
-    free(mmult[0]);
-    mliberar(mmultbloco[0]);
-    free(mmultbloco[0]);
+    for (int i = 0; i < EXECUTIONS; i++) {
+        mliberar(mmult[i]);
+        free(mmult[i]);
+        mliberar(mmultbloco[i]);
+        free(mmultbloco[i]);
+        mliberar(thread_mmult[i]);
+        free(thread_mmult[i]);
+        mliberar(thread_mmultbloco[i]);
+        free(thread_mmultbloco[i]);
+    }
     mliberar(mat_a);
     free(mat_a);
     mliberar(mat_b);
     free(mat_b);
     free(mmult);
     free(mmultbloco);
+    free(thread_mmult);
+    free(thread_mmultbloco);
 
 
     return 0;
