@@ -26,7 +26,7 @@ help:
 	@echo
 	@echo
 	@echo "####### Exemplo de Execução #######"
-	@echo "./main_matrizv3 mat_a3x4.example mat_b4x3.example"
+	@echo "mpirun -np 4 main_matrizv3 mat_a3x4.example mat_b4x3.example"
 	@echo
 	@echo
 
