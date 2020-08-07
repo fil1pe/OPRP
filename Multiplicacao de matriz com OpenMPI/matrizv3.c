@@ -171,20 +171,45 @@ matriz_bloco_t **constroi_submatrizv2(int mat_lin, int mat_col, int divisor) {
   return m;
 }
 
-mymatriz **particionar_matrizv2(mymatriz *mat, int divisor) {
-	mymatriz **m = (mymatriz**) malloc(divisor*sizeof(mymatriz*));
+matriz_bloco_t  *particionar_matrizv2(mymatriz *mat, int orientacao, int divisor, int start) {
+	matriz_bloco_t *m = (matriz_bloco_t*) malloc(sizeof(matriz_bloco_t));
 
-	int bloco_lin = ceil(mat->lin/(float)divisor);
+	m->bloco = (bloco_t*) malloc(sizeof(bloco_t));
+	m->matriz = mat;
 
-	for (int k=0; k<divisor; k++) {
-		m[k] = (mymatriz*) malloc(sizeof(mymatriz));
-		m[k]->lin = k == divisor-1 ? mat->lin - k*bloco_lin : bloco_lin;
-		m[k]->col = mat->col;
-		malocar(m[k]);
-		for (int i=0; i<m[k]->lin; i++)
-			for (int j=0; j<m[k]->col; j++)
-				m[k]->matriz[i][j] = mat->matriz[i + k*bloco_lin][j];
+	switch (orientacao) {
+		case 0:
+			m->bloco->lin_inicio = start;
+			m->bloco->lin_fim = m->bloco->lin_inicio + divisor;
+			m->bloco->col_inicio = 0;
+			m->bloco->col_fim = mat->col;
+			break;
+		
+		default:
+			m->bloco->lin_inicio = 0;
+			m->bloco->lin_fim = mat->lin;
+			m->bloco->col_inicio = start;
+			m->bloco->col_fim = m->bloco->col_inicio + divisor;
+			break;
 	}
+
+	return m;
+}
+
+matriz_bloco_t *constroi_submatrizv3(int mat_lin, int mat_col) {
+	matriz_bloco_t *m = (matriz_bloco_t*) malloc(sizeof(matriz_bloco_t));
+
+	m->bloco = (bloco_t*) malloc(sizeof(bloco_t));
+	m->matriz = (mymatriz*) malloc(sizeof(mymatriz));
+    m->matriz->lin = mat_lin;
+    m->matriz->col = mat_col;
+    malocar(m->matriz);
+    mzerar(m->matriz);
+
+    m->bloco->lin_inicio = 0;
+    m->bloco->lin_fim = mat_lin;
+    m->bloco->col_inicio = 0;
+    m->bloco->col_fim = mat_col;
 
 	return m;
 }

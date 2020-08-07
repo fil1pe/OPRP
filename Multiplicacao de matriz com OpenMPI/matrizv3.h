@@ -20,4 +20,5 @@ matriz_bloco_t **particionar_matriz (int **matriz, int mat_lin, int mat_col, int
 //int imprimir_bloco (matriz_bloco_t *submatriz);
 //matriz_bloco_t **constroi_submatriz (int **matriz, int mat_lin, int mat_col, int divisor);
 matriz_bloco_t **constroi_submatrizv2 (int mat_lin, int mat_col, int divisor);
-mymatriz **particionar_matrizv2(mymatriz *mat, int divisor);
+matriz_bloco_t  *particionar_matrizv2(mymatriz *mat, int orientacao, int divisor, int start);
+matriz_bloco_t *constroi_submatrizv3 (int mat_lin, int mat_col);

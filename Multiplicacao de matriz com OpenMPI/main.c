@@ -31,10 +31,10 @@ int main(int argc, char *argv[]) {
     matriz_bloco_t **submatA, **submatB, **submatC;
     int i, j;
 
+    mat_a = (mymatriz*) malloc(sizeof(mymatriz));
     mat_b = (mymatriz*) malloc(sizeof(mymatriz));
 
     if (!rank) {
-        mat_a = (mymatriz*) malloc(sizeof(mymatriz));
         mmultbloco = (mymatriz **) malloc(EXECUTIONS * sizeof(mymatriz *));
         mmult = (mymatriz **) malloc(EXECUTIONS * sizeof(mymatriz *));
         thread_mmultbloco = (mymatriz **) malloc(EXECUTIONS * sizeof(mymatriz *));
@@ -244,12 +244,12 @@ int main(int argc, char *argv[]) {
         free(mmult[0]);
         mliberar(mmultbloco[0]);
         free(mmultbloco[0]);
-        mliberar(mat_a);
-        free(mat_a);
         free(mmult);
         free(mmultbloco);
     }
 
+    mliberar(mat_a);
+    free(mat_a);
     mliberar(mat_b);
     free(mat_b);
 
