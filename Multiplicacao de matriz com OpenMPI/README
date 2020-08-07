@@ -11,16 +11,18 @@ Utilize o comando make.
 
 1) Gere alguma matriz por meio do comando ./gera_matrizv3 <nr_linhas> <nr_colunas> sendo <nr_linhas> o número de linhas e <nr_colunas> o número de colunas;
 2) Gere outra matriz compatível para a multiplicação;
-3) Execute ./main_matrizv3 <matriz_a> <matriz_b> <nthreads> em que <matriz_a> é o arquivo gerado em (1), <matriz_b> é o arquivo gerado em (2) e <nthreads> é o número de threads desejado.
+3) Execute
 
-Se não for informado um número de threads no comando ./main_matrizv3, serão utilizadas oito threads por padrão.
+$ mpirun --hostfile hostfile -np <np> main_matrizv3 <matriz_a> <matriz_b>
+
+em que <matriz_a> é o arquivo gerado em (1), <matriz_b> é o arquivo gerado em (2) e <np> é o número de processos desejado. Você pode editar o hostfile para realizar seus testes.
 
 ### Os arquivos gerados ###
 
 1) Multiplicação simples: mult<i>.result
-2) Multiplicação simples com OpenMP: mult_openmp<i>.result
+2) Multiplicação simples com OpenMPI: mult_openmpi<i>.result
 3) Multiplicação em bloco: mult_block<i>.result
-4) Multiplicação em bloco com OpenMP: mult_block_openmp<i>.result
+4) Multiplicação em bloco com OpenMPI: mult_block_openmpi<i>.result
 
 em que <i> é o identificador da execução. Por padrão cada uma das quatro abordagens é executada quatro vezes. Pode-se mudar essa repetição alterando o valor da constante EXECUTIONS no arquivo main.c.
 
@@ -30,8 +32,8 @@ Utilize o comando make clean.
 
 ### Exemplo ###
 
-$ make clean; make; ./gmat 1000 1000; ./main 1000x1000-mat.map 1000x1000-mat.map 10
+$ make clean; make; ./gmat 1000 1000; mpirun --hostfile hostfile -np 4 main_matrizv3 1000x1000-mat.map 1000x1000-mat.map
 
 ### Para avaliação ###
 
-As funções implementadas com OpenMP estão localizadas no arquivo matriz-operacoes-openmp.h e matriz-operacoes-openmp.c. Elas são chamadas no programa principal implementado em main.c.
+As funções implementadas com OpenMPI estão localizadas no arquivo matriz-operacoes-openmpi.h e matriz-operacoes-openmpi.c. Elas são chamadas no programa principal implementado em main.c. As chamadas para MPI_Init, MPI_Comm_rank, MPI_Comm_size e MPI_Finalize são feitas no main.c.
