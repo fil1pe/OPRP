@@ -9,6 +9,12 @@
 #include "matriz-operacoesv3.h"
 #include "matriz-structs.h"
 
+int min (int a, int b) {
+    if (a > b)
+        return b;
+    return a;
+}
+
 mymatriz *mmultiplicar_openmpi(mymatriz* mat_a, mymatriz* mat_b, int rank, int size) {
     mymatriz *mat_c = NULL;
 
@@ -79,9 +85,8 @@ mymatriz *mmultiplicar_openmpi_blocos(mymatriz* mat_a, mymatriz* mat_b, int rank
 
     // Define os cortes para os blocos:
     int divisor = ceil(a_col/(float)size);
+    divisor = min(divisor, a_col - rank * divisor);
     int start = divisor * rank;
-    if (rank == size - 1)
-        divisor = a_col - rank * divisor;
 
     // Envia as matrizes A e B:
     if (rank) {
@@ -94,7 +99,7 @@ mymatriz *mmultiplicar_openmpi_blocos(mymatriz* mat_a, mymatriz* mat_b, int rank
     }
     MPI_Bcast(&mat_a->matriz[0][0], a_lin * a_col, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(&mat_b->matriz[0][0], b_lin * b_col, MPI_INT, 0, MPI_COMM_WORLD);
-    
+
     // Define os blocos:
     matriz_bloco_t *bloco_a = particionar_matrizv2(mat_a, 1, divisor, start);
     matriz_bloco_t *bloco_b = particionar_matrizv2(mat_b, 0, divisor, start);
