@@ -85,8 +85,8 @@ mymatriz *mmultiplicar_openmpi_blocos(mymatriz* mat_a, mymatriz* mat_b, int rank
 
     // Define os cortes para os blocos:
     int divisor = ceil(a_col/(float)size);
-    divisor = min(divisor, a_col - rank * divisor);
     int start = divisor * rank;
+    divisor = min(divisor, a_col - rank * divisor);
 
     // Envia as matrizes A e B:
     if (rank) {
