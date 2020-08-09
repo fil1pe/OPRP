@@ -220,9 +220,9 @@ int main(int argc, char *argv[]) {
 
         printf(
             "Multiplicação normal sequencial:\t\t\t%02lf s\
-            \nMultiplicação normal com \033[1m%d processos\033[0m (OpenMPI):\t\t%02lf s\
+            \nMultiplicação normal com \033[1m%02d processos\033[0m (OpenMPI):\t%02lf s\
             \nMultiplicação em bloco sequencial:\t\t\t%02lf s\
-            \nMultiplicação em bloco com \033[1m%d processos\033[0m (OpenMPI):\t%02lf s\n",
+            \nMultiplicação em bloco com \033[1m%02d processos\033[0m (OpenMPI):\t%02lf s\n",
             media_normal_seq,
             nthreads,
             media_normal_thr,
