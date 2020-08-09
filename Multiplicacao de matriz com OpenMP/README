@@ -30,7 +30,7 @@ Utilize o comando make clean.
 
 ### Exemplo ###
 
-$ make clean; make; ./gmat 1000 1000; ./main 1000x1000-mat.map 1000x1000-mat.map 10
+$ make clean; make; ./gera_matrizv3 1000 1000; ./main_matrizv3 1000x1000-mat.map 1000x1000-mat.map 10
 
 ### Para avaliação ###
 
