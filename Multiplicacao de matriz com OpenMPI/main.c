@@ -234,7 +234,7 @@ int main(int argc, char *argv[]) {
         double speedup_normal = media_normal_seq / media_normal_thr;
         double speedup_bloco = media_bloco_seq / media_bloco_thr;
         printf("\n##### Speedups #####\n");
-        printf("Multiplicação normal:\t%03lf\nMultiplicação bloco:\t%03lf\n", speedup_normal, speedup_bloco);
+        printf("Multiplicação normal:\t%03lf\nMultiplicação em bloco:\t%03lf\n", speedup_normal, speedup_bloco);
 
         for (int i = 0; i < EXECUTIONS; i++) {
             mliberar(mmult[i]);
