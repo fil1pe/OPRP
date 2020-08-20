@@ -250,9 +250,10 @@ int main(int argc, char *argv[]) {
         free(mmultbloco);
         free(thread_mmult);
         free(thread_mmultbloco);
+
+        mliberar(mat_a);
     }
 
-    mliberar(mat_a);
     free(mat_a);
     mliberar(mat_b);
     free(mat_b);

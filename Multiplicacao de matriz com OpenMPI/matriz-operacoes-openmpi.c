@@ -86,22 +86,25 @@ mymatriz *mmultiplicar_openmpi_blocos(mymatriz* mat_a, mymatriz* mat_b, int rank
     // Define os cortes para os blocos:
     int divisor = ceil(a_col/(float)size);
     int start = divisor * rank;
-    divisor = min(divisor, a_col - rank * divisor);
 
-    // Envia as matrizes A e B:
+    // Envia as matrizes A^T e B:
+    mymatriz *mat_a_trans;
     if (rank) {
-        mat_a->lin = a_lin;
-        mat_a->col = a_col;
-        mat_b->lin = b_lin;
+        mat_a_trans = (mymatriz*) malloc(sizeof(mymatriz));
+        mat_a_trans->lin = divisor * size;
+        mat_a_trans->col = a_lin;
+        mat_b->lin = divisor * size;
         mat_b->col = b_col;
-        malocar(mat_a);
+        malocar(mat_a_trans);
         malocar(mat_b);
-    }
-    MPI_Bcast(&mat_a->matriz[0][0], a_lin * a_col, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(&mat_b->matriz[0][0], b_lin * b_col, MPI_INT, 0, MPI_COMM_WORLD);
+    } else
+        mat_a_trans = transposta(mat_a);
+    MPI_Scatter(&mat_a_trans->matriz[0][0], divisor * mat_a_trans->col, MPI_INT, &mat_a_trans->matriz[start][0], divisor * mat_a_trans->col, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(&mat_b->matriz[0][0], divisor * mat_b->col, MPI_INT, &mat_b->matriz[start][0], divisor * mat_b->col, MPI_INT, 0, MPI_COMM_WORLD);
 
     // Define os blocos:
-    matriz_bloco_t *bloco_a = particionar_matrizv2(mat_a, 1, divisor, start);
+    divisor = min(divisor, a_col - rank * divisor);
+    matriz_bloco_t *bloco_a = particionar_matrizv2(transposta(mat_a_trans), 1, divisor, start);
     matriz_bloco_t *bloco_b = particionar_matrizv2(mat_b, 0, divisor, start);
     matriz_bloco_t *bloco_c = constroi_submatrizv3(a_lin, b_col);
 
@@ -109,36 +112,21 @@ mymatriz *mmultiplicar_openmpi_blocos(mymatriz* mat_a, mymatriz* mat_b, int rank
     multiplicar_submatriz(bloco_a, bloco_b, bloco_c);
 
     // Envia os blocos para compor a matriz C=A*B:
-    MPI_Status status;
-    if (rank)
-        MPI_Send(&bloco_c->matriz->matriz[0][0], a_lin * b_col, MPI_INT, 0, 0, MPI_COMM_WORLD);
-    else {
-        matriz_bloco_t *aux0 = constroi_submatrizv3(a_lin, b_col);
-        for (int i=1; i<size; i++) {
-            MPI_Recv(&aux0->matriz->matriz[0][0], a_lin * b_col, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
-            mymatriz *aux1 = msomar(bloco_c->matriz, aux0->matriz, 0);
-            mliberar(bloco_c->matriz);
-            free(bloco_c->matriz);
-            bloco_c->matriz = aux1;
-        }
-        free(aux0->bloco);
-        mliberar(aux0->matriz);
-        free(aux0->matriz);
-        free(aux0);
-    }
+    mymatriz *mat_c = constroi_submatrizv3(a_lin, b_col)->matriz;
+    MPI_Reduce(&bloco_c->matriz->matriz[0][0], &mat_c->matriz[0][0], a_lin * b_col, MPI_INT,
+               MPI_SUM, 0, MPI_COMM_WORLD);
 
     // Libera espaço na memória:
+    mliberar(mat_a_trans);
+    free(mat_a_trans);
     free(bloco_a->bloco);
     free(bloco_a);
     free(bloco_b->bloco);
     free(bloco_b);
     free(bloco_c->bloco);
-    if (rank) {
-        mliberar(bloco_c->matriz);
-        free(bloco_c->matriz);
-    }
-    mymatriz *res = bloco_c->matriz;
+    mliberar(bloco_c->matriz);
+    free(bloco_c->matriz);
     free(bloco_c);
 
-    return res;
+    return mat_c;
 }

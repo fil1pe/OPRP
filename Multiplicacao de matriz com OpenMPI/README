@@ -3,6 +3,10 @@
 ###                 Aluno: Filipe Ramos                ###
 ##########################################################
 
+### ATENÇÃO! ###
+
+Para utilizar o hostfile homônimo, só rode a aplicação na plataforma física do LabP2D. Você pode utilizar o hostfile localHostfile para rodar o programa na sua máquina em até oito processos. Sinta-se à vontade para editá-lo!
+
 ### Como compilar ###
 
 Utilize o comando make.
@@ -13,9 +17,9 @@ Utilize o comando make.
 2) Gere outra matriz compatível para a multiplicação;
 3) Execute
 
-$ mpirun --hostfile hostfile -np <np> main_matrizv3 <matriz_a> <matriz_b>
+$ mpirun --hostfile <hf> -np <np> main_matrizv3 <matriz_a> <matriz_b>
 
-em que <matriz_a> é o arquivo gerado em (1), <matriz_b> é o arquivo gerado em (2) e <np> é o número de processos desejado. Você pode editar o hostfile para realizar seus testes.
+em que <matriz_a> é o arquivo gerado em (1), <matriz_b> é o arquivo gerado em (2), <hf> é o hostfile e <np> é o número de processos desejado. Você pode editar o hostfile para realizar seus testes.
 
 ### Os arquivos gerados ###
 
@@ -32,7 +36,7 @@ Utilize o comando make clean.
 
 ### Exemplo ###
 
-$ make clean; make; ./gera_matrizv3 1000 1000; mpirun --hostfile hostfile -np 4 main_matrizv3 1000x1000-mat.map 1000x1000-mat.map
+$ make clean; make; ./gera_matrizv3 1000 1000; mpirun --hostfile localHostfile -np 4 main_matrizv3 1000x1000-mat.map 1000x1000-mat.map
 
 ### Para avaliação ###
 
