@@ -1,0 +1,7 @@
+Este trabalho foi desenvolvido pelos alunos Filipe Ramos e Paula Campigotto para a disciplina de Programação Paralela. O template é de autoria do professor Mauricio Pillon.
+
+As únicas linhas implementadas pelos alunos supracitados foram as intrínsecas à definição da função matMult.
+
+Para rodar o programa, basta executar
+
+$ make; ./main
