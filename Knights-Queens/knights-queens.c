@@ -232,8 +232,6 @@ void knights(int k, int sti, int stj, char** board) {
 
 // Driver code
 int main(int argc, char *argv[]){
-
-
 	// Parse arguments
 	if (argc <= 2) {
 		printf("Uso: %s <número de linhas do tabuleiro> <número de cavalos>\n", argv[0]);
@@ -248,11 +246,9 @@ int main(int argc, char *argv[]){
 	for (int i=1; i<m; i++)
 		board[i] = board[0] + i * n;
 
-
-	// Place knights and queens
-
 	clock_t start = clock();
 
+	// Place knights and queens
 	knights(atoi(argv[2]), 0, 0, board);
 
 	clock_t end = clock();
