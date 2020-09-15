@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define NO_PIECE		'_'
 #define KNIGHT			'K'
@@ -231,6 +232,8 @@ void knights(int k, int sti, int stj, char** board) {
 
 // Driver code
 int main(int argc, char *argv[]){
+
+
 	// Parse arguments
 	if (argc <= 2) {
 		printf("Uso: %s <número de linhas do tabuleiro> <número de cavalos>\n", argv[0]);
@@ -245,9 +248,17 @@ int main(int argc, char *argv[]){
 	for (int i=1; i<m; i++)
 		board[i] = board[0] + i * n;
 
+
 	// Place knights and queens
+
+	clock_t start = clock();
+
 	knights(atoi(argv[2]), 0, 0, board);
 
+	clock_t end = clock();
+    double elapsed = double(end - start)/CLOCKS_PER_SEC;
+
 	printf("\nNúmero de soluções: %d\n", count);
+	printf("\nTempo de execução: %.3f segundos\n", elapsed);
 	return 0;
 }
