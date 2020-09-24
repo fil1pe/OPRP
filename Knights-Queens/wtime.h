@@ -1,0 +1,1 @@
+__host__ double wtime();

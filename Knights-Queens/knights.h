@@ -1,0 +1,1 @@
+__host__ void knights(int, chessboard*);
