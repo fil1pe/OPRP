@@ -1,0 +1,37 @@
+#################################################
+### Disciplina de Programação Paralela 2020/1 ###
+###  Alunos: Filipe Ramos e Paula Campigotto  ###
+#################################################
+
+### Descrição ###
+
+Dado o tamanho do tabuleiro quadrado e um número de cavalos n, o algoritmo deve posicionar n cavalos e um número máximo de rainhas no tabuleiro. A solução original é sequencial em C++, sem muitas otimizações. O programa desenvolvido pelos autores do presente trabalho foi implementado utilizando a API CUDA e a linguagem de programação C. O trabalho foi feito visando a execução na máquina ens5 do LabP2D.
+
+### Como compilar ###
+
+Utilize o comando
+
+$ make
+
+### Como executar ###
+
+Basta rodar na ens5 o comando
+
+$ ./main <m> <n>
+
+em que <m> é o número de linhas do tabuleiro e <n> o número de cavalos a serem posicionados.
+
+### Como limpar os executáveis ###
+
+Por padrão os arquivos objeto (.o) já são apagados após o execução do make. Para apagar o executável gerado pelo makefile, use
+
+$ make clean
+
+### Arquivos ###
+
+board.(h|cu)       - definição de constantes, tabuleiro e funções para mostrar o tabuleiro
+knights.(h|cu)     - funções que posicionam os cavalos
+queens.(h|cu)      - funções que posicionam as rainhas
+main.cu            - função principal, que lê os argumentos e chama as demais
+melhorExecucao.log - log contendo a execução comparativa para um tabuleiro 600x600 com 300 cavalos
+wtime.(h|cu)       - função de autoria do professor que calcula o tempo de execução
