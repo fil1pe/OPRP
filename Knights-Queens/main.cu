@@ -1,10 +1,12 @@
 #include <cuda.h>
 #include <stdio.h>
+#include <math.h>
 #include "wtime.h"
 #include "board.h"
 #include "knights.h"
+#define BLOCK_SIZE 128
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const *argv[]){
 	// Parses arguments
 	if(argc <= 2){
 		printf("Uso: %s <número de linhas do tabuleiro> <número de cavalos>\n", argv[0]);
@@ -29,8 +31,12 @@ int main(int argc, char const *argv[]) {
 	// Starts stopwatch
 	double start = wtime();
 
+	// CUDA dimensions
+	dim3 dimBlock(ceil(max(m, n)/(float)BLOCK_SIZE));
+	dim3 dimThreads(BLOCK_SIZE);
+
 	// Places knights and queens
-	knights(k, &board, NULL);
+	knights(k, &board, NULL, dimBlock, dimThreads);
 
 	// Displays result
 	displayBoard(&board);

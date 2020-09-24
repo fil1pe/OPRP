@@ -28,7 +28,7 @@ __global__ void place_queen(char *board, int i, int j, int m, int n){
 }
 
 // Places queens
-__host__ void queens(int qui, int quj, chessboard *board, char *board_dev, char **skip) {
+__host__ void queens(int qui, int quj, chessboard *board, char *board_dev, char **skip, dim3 dimBlock, dim3 dimThreads){
 	// Allocates auxiliary matrix that tells whether to skip cells
 	if(skip == NULL){
 		cudaMallocHost(&skip, sizeof(char*)*board->lin);
@@ -44,7 +44,6 @@ __host__ void queens(int qui, int quj, chessboard *board, char *board_dev, char 
 		for(int j=quj; j<board->col; j++)
 			// If (i, j) is free to place queen, does it
 			if(board->board[i][j] == NO_PIECE){
-				dim3 dimBlock (1);dim3 dimThreads(board->lin); // MELHORAR
 				place_queen<<<dimBlock, dimThreads>>>(board_dev, i, j, board->lin, board->col);
 				cudaDeviceSynchronize();
 				cudaMemcpy(board->board[0], board_dev, board->lin * board->col, cudaMemcpyDeviceToHost);
@@ -52,7 +51,7 @@ __host__ void queens(int qui, int quj, chessboard *board, char *board_dev, char 
 			// If (i, j) is marked in order to not place queen, calls recursion 
 			}else if((board->board[i][j] == QUEEN_ATTACK || board->board[i][j] == DONT_PLACE_QUEEN) && !skip[i][j]){
 				skip[i][j] = 1;
-				queens(i, j, board, board_dev, skip);
+				queens(i, j, board, board_dev, skip, dimBlock, dimThreads);
 			}
 	}
 }

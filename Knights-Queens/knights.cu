@@ -51,7 +51,7 @@ __global__ void place_knight(char *board, int i, int j, int m, int n){
 }
 
 // Places k knights
-__host__ void knights(int k, chessboard *board, char *board_dev){
+__host__ void knights(int k, chessboard *board, char *board_dev, dim3 dimBlock, dim3 dimThreads){
 	// Allocates board on the device
 	if(board_dev == NULL){
 		cudaMalloc(&board_dev, board->lin * board->col);
@@ -60,7 +60,7 @@ __host__ void knights(int k, chessboard *board, char *board_dev){
 
 	// If no knight is to be placed, places queens
 	if(k == 0){
-		queens(0, 0, board, board_dev, NULL);
+		queens(0, 0, board, board_dev, NULL, dimBlock, dimThreads);
 		return;
 	}
 
@@ -72,14 +72,13 @@ __host__ void knights(int k, chessboard *board, char *board_dev){
 		for(int j=0; j<board->col; j++)
 			// If (i, j) is free to place knight, does it
 			if(board->board[i][j] == NO_PIECE || board->board[i][j] == DONT_PLACE_QUEEN){
-				dim3 dimBlock (1);dim3 dimThreads(board->lin); // MELHORAR
 				place_knight<<<dimBlock, dimThreads>>>(board_dev, i, j, board->lin, board->col);
 				cudaDeviceSynchronize();
 				cudaMemcpy(board->board[0], board_dev, board->lin * board->col, cudaMemcpyDeviceToHost);
 				
 				// If already placed k knights, it's time to place queens
 				if(++count == k){
-					knights(0, board, board_dev);
+					knights(0, board, board_dev, dimBlock, dimThreads);
 					return;
 				}
 			}

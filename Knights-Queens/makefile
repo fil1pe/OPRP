@@ -14,7 +14,7 @@ all: $(TARGET)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 main: main.cu wtime.o knights.o queens.o board.o
-	$(CC) $(CCFLAGS) wtime.o board.o queens.o knights.o main.cu -o $@
+	$(CC) $(CCFLAGS) wtime.o board.o queens.o knights.o main.cu -o $@ -lm
 
 o_clean:
 	rm *.o
