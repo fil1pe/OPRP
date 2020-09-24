@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
 	double start = wtime();
 
 	// Places knights and queens
-	knights(k, &board);
+	knights(k, &board, NULL);
 
 	// Displays result
 	displayBoard(&board);

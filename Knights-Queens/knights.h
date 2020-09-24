@@ -1,1 +1,1 @@
-__host__ void knights(int, chessboard*);
+__host__ void knights(int, chessboard*, char*);

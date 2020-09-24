@@ -1,1 +1,1 @@
-__host__ int queens(int, int, chessboard*);
+__host__ int queens(int, int, chessboard*, char*, char**);

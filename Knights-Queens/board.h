@@ -4,7 +4,6 @@
 #define KNIGHT_ATTACK		'k'
 #define QUEEN_ATTACK		'q'
 #define DONT_PLACE_QUEEN	'*'
-#define SKIP				'j'
 
 typedef struct {
 	char **board;
